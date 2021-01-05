@@ -166,6 +166,38 @@ Array.prototype.reverse = function () {
   }
 };
 
+// toString mathod
+
+Array.prototype.toString = function () {
+  let separator = ",";
+
+  // Create an empty string
+  let str = "";
+  // add each el + seprator
+  for (let i = 0; i < this.length; i++) {
+    // if el is an empty array just add an empty space
+    if (Array.isArray(this[i]) && !this[i].length) {
+      str += "";
+    }
+    //if el is an array call array.toString()
+    if (Array.isArray(this[i]) && this[i].length) {
+      str += this[i].toString();
+      // if its the lest round dont add the separator (it should not add one to the end)
+      if (i < this.length - 1) str += separator;
+    }
+    // if el is null or undefind add an empty space
+    else if (this[i] === null || this[i] === undefined) {
+      str += "";
+      if (i < this.length - 1) str += separator;
+    } else {
+      str += this[i];
+      // if its the lest round dont add the separator (it should not add one to the end)
+      if (i < this.length - 1) str += separator;
+    }
+  }
+  return String(str);
+};
+
 // join mathod
 
 Array.prototype.join = function (separator) {
@@ -198,13 +230,65 @@ Array.prototype.join = function (separator) {
   return String(str);
 };
 
-//testing area
+//indexOf mathod
 
-let myArr = new Array(1, "f", null, "r");
-let myArr2 = new Array([], undefined, 7);
-let myArr3 = myArr.concat(myArr2);
-// console.log(myArr3);
-// console.log(myArr3.splice(20, 2, "fab", "test"));
-console.log(myArr3);
-// console.log(myArr3.reverse());
-console.log(myArr3.join("-"));
+Array.prototype.indexOf = function (searchElement, fromIndex) {
+  // from index is optinal if ommit start from 0
+  if (fromIndex === undefined) fromIndex = 0;
+  //If the provided index value is a negative number, it is taken as the offset from the end of the array. Note: if the provided index is negative, the array is still searched from front to back.
+  if (fromIndex < 0) fromIndex = this.length - Math.abs(fromIndex);
+  // search the array
+  for (let i = fromIndex; i < this.length; i++) {
+    if (this[i] === searchElement) return i;
+  }
+  return -1;
+};
+
+//lastIndexOf mathod
+
+Array.prototype.lastIndexOf = function (searchElement, fromIndex) {
+  // from index is optinal Defaults to the array's length minus one (arr.length - 1),
+  if (fromIndex === undefined) fromIndex = this.length - 1;
+  //If negative, it is taken as the offset from the end of the array. Note that even when the index is negative, the array is still searched from back to front
+  if (fromIndex < 0) fromIndex = this.length - Math.abs(fromIndex);
+  // search the array
+  for (let i = fromIndex; i >= 0; i--) {
+    if (this[i] === searchElement) return i;
+  }
+  return -1;
+};
+
+// includes mathod
+
+Array.prototype.includes = function (searchElement, fromIndex) {
+  // from index is optinal if ommit start from 0
+  if (fromIndex === undefined) fromIndex = 0;
+  //if the provided index is negative, the array is still searched from front to back
+  if (fromIndex < 0) fromIndex = this.length - Math.abs(fromIndex);
+  // search the array
+  for (let i = fromIndex; i < this.length; i++) {
+    if (this[i] === searchElement) return true;
+  }
+  return false;
+};
+
+//slice mathod
+
+Array.prototype.slice = function (start, end) {
+  //If start is undefined, slice starts from the index 0
+  if (start === undefined) start = 0;
+  // A negative index can be used, indicating an offset from the end of the sequence. slice(-2) extracts the last two elements in the sequence.
+  if (start < 0) start = this.length - Math.abs(start);
+  //If end is omitted, slice extracts through the end of the sequence (arr.length).
+  if (end === undefined) end = this.length;
+  //A negative index can be used, indicating an offset from the end of the sequence. slice(2,-1) extracts the third element through the second-to-last element in the sequence.
+  if (end < 0) end = this.length - Math.abs(end);
+  //If end is greater than the length of the sequence, slice extracts through to the end of the sequence (arr.length).
+  if (end > this.length) end = this.length;
+
+  let res = new Array();
+  for (let i = start; i < end; i++) {
+    res.push(this[i]);
+  }
+  return res;
+};
