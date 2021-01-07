@@ -410,15 +410,69 @@ Array.prototype.filter = function (fn, thisArg) {
   return res;
 };
 
+// map mathod
+Array.prototype.map = function (fn, thisArg) {
+  let arr = null;
+  if (thisArg === undefined) {
+    arr = this;
+  } else {
+    arr = thisArg;
+  }
+  const res = new Array();
+  for (let i = 0; i < arr.length; i++) {
+    res.push(fn(arr[i], i, arr));
+  }
+  return res;
+};
+
+// find mathod
+
+Array.prototype.find = function (fn, thisArg) {
+  let arr = null;
+  if (thisArg === undefined) {
+    arr = this;
+  } else {
+    arr = thisArg;
+  }
+  for (let i = 0; i < arr.length; i++) {
+    if (fn(arr[i], i, arr)) return this[i];
+  }
+  return undefined;
+};
+
+// findIndex mathod
+
+Array.prototype.findIndex = function (fn, thisArg) {
+  let arr = null;
+  if (thisArg === undefined) {
+    arr = this;
+  } else {
+    arr = thisArg;
+  }
+  for (let i = 0; i < arr.length; i++) {
+    if (fn(arr[i], i, arr)) return i;
+  }
+  return -1;
+};
+
+// forEach mathod
+Array.prototype.forEach = function (fn, thisArg) {
+  let arr = null;
+  if (thisArg === undefined) {
+    arr = this;
+  } else {
+    arr = thisArg;
+  }
+  for (let i = 0; i < arr.length; i++) {
+    if (this[i]) fn(arr[i], i, arr);
+  }
+};
+
 //testing area
 
 // Todo....
 
 /*
-find
-findIndex
-forEach
-map
 reduse
 reduseRight
 */
