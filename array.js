@@ -468,13 +468,24 @@ Array.prototype.forEach = function (fn, thisArg) {
   }
 };
 
+// Reduce Method 
+Array.prototype.reduce = function (callbackFn, initialValue) {
+  let acc = initialValue;
+  for(let i = 0 ; i < this.length; i ++) {
+  console.log("this",this[i])
+    acc = callbackFn(acc, this[i])
+    console.log("acc",acc)
+  }
+  return acc
+};
+
 //testing area
 
 // Todo....
 
 /*
-reduse
-reduseRight
+
+reduceRight
 */
 
 //iterrators
@@ -489,3 +500,4 @@ entries
 // algorithems
 
 //sort
+
