@@ -472,9 +472,7 @@ Array.prototype.forEach = function (fn, thisArg) {
 Array.prototype.reduce = function (callbackFn, initialValue) {
   let acc = initialValue;
   for(let i = 0 ; i < this.length; i ++) {
-  console.log("this",this[i])
     acc = callbackFn(acc, this[i])
-    console.log("acc",acc)
   }
   return acc
 };
@@ -500,4 +498,5 @@ entries
 // algorithems
 
 //sort
+
 
