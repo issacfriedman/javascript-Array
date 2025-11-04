@@ -469,13 +469,17 @@ Array.prototype.forEach = function (fn, thisArg) {
 };
 
 // Reduce Method 
-Array.prototype.reduce = function (callbackFn, initialValue) {
-  let acc = initialValue;
-  for(let i = 0 ; i < this.length; i ++) {
-    acc = callbackFn(acc, this[i])
+Array.prototype.myReduce = function (callbackFn, initialValue ) {
+  if (!initialValue && this.length === 0) throw new TypeError("Array is empty and no initial value provided.")
+  let acc = initialValue ? initialValue : this[0];
+
+  const startAt = initialValue ? 0 : 1;
+  for (let i = startAt; i < this.length; i++) {
+    acc = callbackFn(acc, this[i], i , this);
   }
-  return acc
+  return acc;
 };
+
 
 //testing area
 
@@ -498,5 +502,6 @@ entries
 // algorithems
 
 //sort
+
 
 
